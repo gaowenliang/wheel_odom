@@ -1,0 +1,28 @@
+<launch>
+    <arg name="is_onboard" value="true"/>
+    <arg name="is_newestPtCloud" value="false"/>
+    <arg name="odom_topic" value="/wheel_odom"/>
+
+<node pkg="wheel_odom"
+      name="wheel_odom"
+      type="wheel_odom"
+      output="screen">
+      <param name="vehicle_width" value="2.0"/>
+      <param name="vehicle_wheelbase" value="3.0"/>
+      <param name="time_delay" value="0.0"/>
+
+</node>
+
+   <node pkg="odom_visualization"
+         name="odom_visualization_ukf"
+         type="odom_visualization"       
+         output="screen">
+     <remap from="~odom" to="$(arg odom_topic)"/>
+     <param name="color/a" value="0.8"/>    
+     <param name="color/r" value="1.0"/>        
+     <param name="color/g" value="0.0"/>        
+     <param name="color/b" value="0.0"/>       
+     <param name="covariance_scale" value="100.0"/>       
+   </node>
+
+</launch>
