@@ -5,6 +5,7 @@
 
 #include <math.h>
 
+template< class T >
 class Pose2D
 {
     public:
@@ -14,7 +15,7 @@ class Pose2D
     , yaw( 0 )
     {
     }
-    Pose2D( double _x, double _y, double _yaw )
+    Pose2D( T _x, T _y, T _yaw )
     : x( _x )
     , y( _y )
     , yaw( _yaw )
@@ -37,16 +38,19 @@ class Pose2D
                        y + ( dpose.x * sin( yaw ) + dpose.y * cos( yaw ) ), //
                        fmod( ( yaw + dpose.yaw ), 2 * CON_PI_F ) );
     }
-    inline Pose2D add( const double& dx, const double& dy, const double& dyaw ) const
+    inline Pose2D add( const T& dx, const T& dy, const T& dyaw ) const
     {
         return Pose2D( x + ( dx * cos( yaw ) - dy * sin( yaw ) ), //
                        y + ( dx * sin( yaw ) + dy * cos( yaw ) ), //
                        fmod( ( yaw + dyaw ), 2 * CON_PI_F ) );
     }
 
-    double x;
-    double y;
-    double yaw; // yaw in rad
+    T x;
+    T y;
+    T yaw; // yaw in rad
 };
+
+typedef Pose2D< double > Pose2Dd;
+typedef Pose2D< float > Pose2Df;
 
 #endif // POSE2D_H

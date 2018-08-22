@@ -25,14 +25,22 @@ main( int argc, char** argv )
         chassisState_.steering        = std::abs( sin( now_t.toSec( ) ) );
         chassis_pub.publish( chassisState_ );
 
+        double randn1 = 0.1 * rand( ) / double( RAND_MAX );
+        double randn2 = 0.1 * rand( ) / double( RAND_MAX );
+        double randn3 = 0.1 * rand( ) / double( RAND_MAX );
+        double randn4 = 0.1 * rand( ) / double( RAND_MAX );
+
         wheel_odom::wheelSpeeds wheelSpeeds_;
         wheelSpeeds_.header.stamp    = now_t;
         wheelSpeeds_.header.frame_id = "wheel";
-        wheelSpeeds_.speedLB         = 1.2;
-        wheelSpeeds_.speedRB         = 1.3;
-        wheelSpeeds_.speedLF         = 1.2;
-        wheelSpeeds_.speedRF         = 1.4;
+        wheelSpeeds_.speedLB         = 1.2 + randn1;
+        wheelSpeeds_.speedRB         = 1.3 + randn2;
+        wheelSpeeds_.speedLF         = 1.2 + randn3;
+        wheelSpeeds_.speedRF         = 1.4 + randn4;
         speed_pub.publish( wheelSpeeds_ );
+
+        std::cout << "speed " << wheelSpeeds_.speedLB << " " << wheelSpeeds_.speedRB << " "
+                  << wheelSpeeds_.speedLF << " " << wheelSpeeds_.speedRF << "\n";
     }
 
     return 0;

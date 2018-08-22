@@ -1,7 +1,7 @@
 #ifndef WHEELODOMETRYROS_H
 #define WHEELODOMETRYROS_H
 
-#include "../WheelOdom2/WheelOdom2.h"
+#include "../WheelOdom/WheelOdomFactory.h"
 #include <nav_msgs/Odometry.h>
 #include <ros/ros.h>
 #include <wheel_odom/steeringAngle.h>
@@ -20,7 +20,8 @@ class WheelOdometryROS
     void speedCallback( const wheel_odom::wheelSpeedsConstPtr& speed );
 
     private:
-    WheelOdom2* odom;
+    WheelOdomPtr odom;
+    WheelModel model_type;
 
     ros::Subscriber steering_sub;
     ros::Subscriber wheel_speeds_sub;

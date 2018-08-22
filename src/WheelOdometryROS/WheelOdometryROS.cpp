@@ -3,7 +3,9 @@
 wheel_odom::WheelOdometryROS::WheelOdometryROS( ros::NodeHandle nh, double length, double width )
 : is_first_run( true )
 {
-    odom = new WheelOdom2( length, width );
+
+    model_type = REAR_WHEEL;
+    odom = wheel_odom::WheelOdomFactory::newWheelOdom( )->init( model_type, length, width );
 
     steering_sub
     = nh.subscribe< wheel_odom::steeringAngle >( "steering", //
@@ -42,16 +44,27 @@ wheel_odom::WheelOdometryROS::speedCallback( const wheel_odom::wheelSpeedsConstP
         m_dt       = speed->header.stamp.toSec( ) - m_timePrev;
         m_timePrev = speed->header.stamp.toSec( );
     }
-    odom->setSpeedFL( speed->speedLF );
-    odom->setSpeedFR( speed->speedRF );
-    odom->setSpeedBL( speed->speedLB );
-    odom->setSpeedBR( speed->speedRB );
+
+    switch ( model_type )
+    {
+        case FRONT_WHEEL:
+            odom->setSpeedIndex( speed->speedRF, 0 );
+            odom->setSpeedIndex( speed->speedLF, 1 );
+            break;
+        case REAR_WHEEL:
+            odom->setSpeedIndex( speed->speedRB, 0 );
+            odom->setSpeedIndex( speed->speedLB, 1 );
+            break;
+        default:
+            break;
+    }
+
     odom->setDt( m_dt );
 
     odom->calcOdom( );
 
-    Pose2D odom2d = odom->getPose( );
-    Pose2D vel2d  = odom->getVel( );
+    Pose2Dd odom2d = odom->getPose( );
+    Pose2Dd vel2d  = odom->getVel( );
 
     {
         double yaw = odom2d.yaw;

@@ -53,13 +53,22 @@ include_directories(
 # ${catkin_INCLUDE_DIRS}
 )
 
-set(wheel_odom_LIB_SOURCE_FILES
-    ${PROJECT_SOURCE_DIR}/src/WheelOdom2/WheelOdom2.cpp
+set(WheelOdom_LIB_SOURCE_FILES
+    ${PROJECT_SOURCE_DIR}/src/WheelOdom/WheelOdom.cpp
+    ${PROJECT_SOURCE_DIR}/src/WheelOdom/FrontWheel.cpp
+    ${PROJECT_SOURCE_DIR}/src/WheelOdom/RearWheel.cpp
+    ${PROJECT_SOURCE_DIR}/src/WheelOdom/Tricycle.cpp
+    ${PROJECT_SOURCE_DIR}/src/WheelOdom/WheelOdomFactory.cpp
+    )
+set(WheelOdom_ROS_LIB_SOURCE_FILES
     ${PROJECT_SOURCE_DIR}/src/WheelOdometryROS/WheelOdometryROS.cpp
     )
 
+
+
 add_executable(wheel_odom
-    ${wheel_odom_LIB_SOURCE_FILES}
+    ${WheelOdom_LIB_SOURCE_FILES}
+    ${WheelOdom_ROS_LIB_SOURCE_FILES}
     src/wheelOdomNode.cpp )
 target_link_libraries(wheel_odom    dw     ${catkin_LIBRARIES}  )
 
