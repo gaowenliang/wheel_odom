@@ -1,5 +1,15 @@
 #include "RearWheel.h"
 
+//               ^ x
+//               |
+//               |
+//         y<----O
+//
+//      -  |   width  |
+//      |       | |
+//    length    | |
+//      |       | |
+//      -  [1]-------[0]
 #define m_speedBR speedIndex( 0 )
 #define m_speedBL speedIndex( 1 )
 
@@ -39,6 +49,6 @@ wheel_odom::RearWheel::calcOdom( )
         dtheta = omega * m_deltaT;
     }
 
-    pose = pose.add( dx, dy, dtheta );
-    vel  = Pose2Dd( dx / m_deltaT, dy / m_deltaT, dtheta / m_deltaT );
+    m_pose = m_pose.add( dx, dy, dtheta );
+    m_vel  = Pose2Dd( dx / m_deltaT, dy / m_deltaT, dtheta / m_deltaT );
 }

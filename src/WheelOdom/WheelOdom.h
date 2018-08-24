@@ -13,6 +13,9 @@ enum WheelModel
     FRONT_WHEEL = 0,
     REAR_WHEEL,
     TRICYCLE,
+    BICYCLE,
+    OMNI_WHEEL,
+    MECANUM_WHEEL
 };
 
 class WheelOdom
@@ -30,7 +33,10 @@ class WheelOdom
     void setRIndex( const double _R, const int index );
     void setDt( double deltaT );
 
+    // Inverse Kinematic Problem
     virtual void calcOdom( ) = 0;
+    // Forward Kinematic Problem
+    virtual std::vector< double > velToWheelVel( const Pose2Dd pose ) = 0;
 
     virtual Pose2Dd getPose( Eigen::Matrix3d exR, Eigen::Vector3d exT ) = 0;
     virtual Pose2Dd getVel( Eigen::Matrix3d exR, Eigen::Vector3d exT )  = 0;
@@ -58,8 +64,8 @@ class WheelOdom
     std::vector< double > m_wheelRs;
     std::vector< double > m_wheelOmegas;
 
-    Pose2Dd pose;
-    Pose2Dd vel;
+    Pose2Dd m_pose;
+    Pose2Dd m_vel;
 };
 
 typedef boost::shared_ptr< WheelOdom > WheelOdomPtr;

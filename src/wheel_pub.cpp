@@ -33,10 +33,20 @@ main( int argc, char** argv )
         wheel_odom::wheelSpeeds wheelSpeeds_;
         wheelSpeeds_.header.stamp    = now_t;
         wheelSpeeds_.header.frame_id = "wheel";
-        wheelSpeeds_.speedLB         = 1.2 + randn1;
-        wheelSpeeds_.speedRB         = 1.3 + randn2;
-        wheelSpeeds_.speedLF         = 1.2 + randn3;
-        wheelSpeeds_.speedRF         = 1.4 + randn4;
+        if ( 1 )
+        {
+            wheelSpeeds_.speedLB = 1.2 + randn1;
+            wheelSpeeds_.speedRB = 1.3 + randn2;
+            wheelSpeeds_.speedLF = 1.2 + randn3;
+            wheelSpeeds_.speedRF = 1.4 + randn4;
+        }
+        if ( 0 )
+        {
+            wheelSpeeds_.speedLF = 10 * randn3;
+            wheelSpeeds_.speedLB = 10 * randn1;
+            wheelSpeeds_.speedRB = 10 * randn2;
+            wheelSpeeds_.speedRF = 10 * randn4;
+        }
         speed_pub.publish( wheelSpeeds_ );
 
         std::cout << "speed " << wheelSpeeds_.speedLB << " " << wheelSpeeds_.speedRB << " "

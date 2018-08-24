@@ -1,5 +1,7 @@
 #include "WheelOdomFactory.h"
+#include "Bicycle.h"
 #include "FrontWheel.h"
+#include "MecanumWheel.h"
 #include "RearWheel.h"
 #include "Tricycle.h"
 
@@ -36,6 +38,16 @@ wheel_odom::WheelOdomFactory::init( wheel_odom::WheelModel type, double _length,
         case TRICYCLE:
         {
             TricyclePtr initial( new Tricycle( _length, _width ) );
+            return initial;
+        }
+        case BICYCLE:
+        {
+            BicyclePtr initial( new Bicycle( _length, _width ) );
+            return initial;
+        }
+        case MECANUM_WHEEL:
+        {
+            MecanumWheelPtr initial( new MecanumWheel( _length, _width ) );
             return initial;
         }
         default:

@@ -1,5 +1,17 @@
 #include "FrontWheel.h"
 
+//           ^ x
+//           |
+//           |
+//     y<----O
+//
+//      |   width  |
+//    - [1]-------[0]
+//    |      | |
+//  length   | |
+//    |      | |
+//    -
+//
 #define m_speedFR speedIndex( 0 )
 #define m_speedFL speedIndex( 1 )
 
@@ -21,7 +33,7 @@ wheel_odom::FrontWheel::calcOdom( )
 
     avgSpeedF = ( m_speedFR + m_speedFL ) / 2;
 
-    double dx = 0, dy = 0, dtheta = 0;
+    double dx = 0, dy = 0, dtheta = 0; // in local frame
     if ( std::abs( m_steeringAngle ) < 1e-6 )
     {
         dx     = avgSpeedF * m_deltaT;
@@ -45,6 +57,6 @@ wheel_odom::FrontWheel::calcOdom( )
         dtheta = avgSpeedF / m_length * sin( m_steeringAngle ) * m_deltaT;
     }
 
-    pose = pose.add( dx, dy, dtheta );
-    vel  = Pose2Dd( dx / m_deltaT, dy / m_deltaT, dtheta / m_deltaT );
+    m_pose = m_pose.add( dx, dy, dtheta );
+    m_vel  = Pose2Dd( dx / m_deltaT, dy / m_deltaT, dtheta / m_deltaT );
 }

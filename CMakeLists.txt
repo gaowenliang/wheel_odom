@@ -58,6 +58,9 @@ set(WheelOdom_LIB_SOURCE_FILES
     ${PROJECT_SOURCE_DIR}/src/WheelOdom/FrontWheel.cpp
     ${PROJECT_SOURCE_DIR}/src/WheelOdom/RearWheel.cpp
     ${PROJECT_SOURCE_DIR}/src/WheelOdom/Tricycle.cpp
+    ${PROJECT_SOURCE_DIR}/src/WheelOdom/Bicycle.cpp
+    ${PROJECT_SOURCE_DIR}/src/WheelOdom/OmniWheel.cpp
+    ${PROJECT_SOURCE_DIR}/src/WheelOdom/MecanumWheel.cpp
     ${PROJECT_SOURCE_DIR}/src/WheelOdom/WheelOdomFactory.cpp
     )
 set(WheelOdom_ROS_LIB_SOURCE_FILES

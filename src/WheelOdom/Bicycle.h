@@ -1,5 +1,5 @@
-#ifndef TRICYCLE_H
-#define TRICYCLE_H
+#ifndef BICYCLE_H
+#define BICYCLE_H
 
 #include "../WheelOdom/WheelOdom.h"
 #include <cmath>
@@ -11,21 +11,22 @@ namespace wheel_odom
 //           |
 //     y<----O
 //
-//          |   width  |
 //      -       [0]
 //      |       | |
 //    length    | |
 //      |       | |
-//      -  [1]-------[2]
+//      -       [1]
 
-class Tricycle : public WheelOdom
+class Bicycle : public WheelOdom
 {
     public:
-    Tricycle( ) {}
-    Tricycle( double _length, double _width )
-    : WheelOdom( _length, _width, 1 )
+    Bicycle( ) {}
+    Bicycle( double _length, double _width )
+    : WheelOdom( _length, _width, 2 )
     , m_R( 0 )
     {
+        m_lf = m_length / 2;
+        m_lr = m_length / 2;
     }
 
     void calcOdom( );
@@ -37,10 +38,11 @@ class Tricycle : public WheelOdom
     Pose2Dd getVel( Eigen::Matrix3d exR, Eigen::Vector3d exT ) { return Pose2Dd( ); }
 
     private:
-    double m_R; // turn radius in m
-    double m_omega;
+    double m_lf, m_lr;
+    double m_R;    // turn radius in m
+    double m_beta; //
 };
 
-typedef boost::shared_ptr< Tricycle > TricyclePtr;
+typedef boost::shared_ptr< Bicycle > BicyclePtr;
 }
-#endif // TRICYCLE_H
+#endif // BICYCLE_H

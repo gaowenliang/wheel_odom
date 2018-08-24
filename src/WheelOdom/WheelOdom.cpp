@@ -58,19 +58,19 @@ wheel_odom::WheelOdom::setDt( double deltaT )
 Pose2Dd
 wheel_odom::WheelOdom::getPose( ) const
 {
-    return pose;
+    return m_pose;
 }
 
 Pose2Dd
 wheel_odom::WheelOdom::getVel( ) const
 {
-    return vel;
+    return m_vel;
 }
 
 void
 wheel_odom::WheelOdom::setPose( const Pose2Dd& value )
 {
-    pose = value;
+    m_pose = value;
 }
 
 void

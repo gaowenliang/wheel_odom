@@ -6,14 +6,16 @@
 
 namespace wheel_odom
 {
+//               ^ x
+//               |
+//               |
+//         y<----O
 //
 //      -  |   width  |
 //      |       | |
 //    length    | |
 //      |       | |
 //      -  [1]-------[0]
-// 1 Speed of the back right wheel , m/s
-// 0 Speed of the back left wheel , m/s
 
 class RearWheel : public WheelOdom
 {
@@ -22,6 +24,10 @@ class RearWheel : public WheelOdom
     RearWheel( double _length, double _width );
 
     void calcOdom( );
+    std::vector< double > velToWheelVel( const Pose2Dd vel )
+    {
+        return std::vector< double >( );
+    }
     Pose2Dd getPose( Eigen::Matrix3d exR, Eigen::Vector3d exT ) { return Pose2Dd( ); }
     Pose2Dd getVel( Eigen::Matrix3d exR, Eigen::Vector3d exT ) { return Pose2Dd( ); }
 
