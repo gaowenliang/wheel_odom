@@ -42,3 +42,11 @@ wheel_odom::Tricycle::calcOdom( )
     m_pose = m_pose.add( dx, dy, dtheta );
     m_vel  = Pose2Dd( dx / m_deltaT, dy / m_deltaT, dtheta / m_deltaT );
 }
+
+wheel_odom::Tricycle::Tricycle( ) {}
+
+wheel_odom::Tricycle::Tricycle( double _length, double _width )
+: WheelOdom( _length, _width, 1 )
+, m_R( 0 )
+{
+}

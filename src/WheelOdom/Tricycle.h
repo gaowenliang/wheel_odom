@@ -21,12 +21,8 @@ namespace wheel_odom
 class Tricycle : public WheelOdom
 {
     public:
-    Tricycle( ) {}
-    Tricycle( double _length, double _width )
-    : WheelOdom( _length, _width, 1 )
-    , m_R( 0 )
-    {
-    }
+    Tricycle( );
+    Tricycle( double _length, double _width );
 
     void calcOdom( );
     std::vector< double > velToWheelVel( const Pose2Dd pose )

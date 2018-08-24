@@ -24,13 +24,8 @@ namespace wheel_odom
 class OmniWheel : public WheelOdom
 {
     public:
-    OmniWheel( ) {}
-    OmniWheel( double _length, double _width )
-    : WheelOdom( _length, _width, 3 )
-    , m_L( 0.0 )
-    {
-        m_L = _length / 1.5;
-    }
+    OmniWheel( );
+    OmniWheel( double _length, double _width );
 
     void calcOdom( );
     std::vector< double > velToWheelVel( const Pose2Dd vel );

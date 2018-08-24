@@ -4,6 +4,15 @@
 #define m_speed1 speedIndex( 1 )
 #define m_speed2 speedIndex( 2 )
 
+wheel_odom::OmniWheel::OmniWheel( ) {}
+
+wheel_odom::OmniWheel::OmniWheel( double _length, double _width )
+: WheelOdom( _length, _width, 3 )
+, m_L( 0.0 )
+{
+    m_L = _length / 1.5;
+}
+
 void
 wheel_odom::OmniWheel::calcOdom( )
 {
