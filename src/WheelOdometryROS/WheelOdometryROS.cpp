@@ -3,7 +3,7 @@
 wheel_odom::WheelOdometryROS::WheelOdometryROS( ros::NodeHandle nh, double length, double width )
 : is_first_run( true )
 {
-    model_type = MECANUM_WHEEL;
+    model_type = OMNI_WHEEL;
     odom = wheel_odom::WheelOdomFactory::newWheelOdom( )->init( model_type, length, width );
 
     steering_sub
@@ -56,6 +56,11 @@ wheel_odom::WheelOdometryROS::speedCallback( const wheel_odom::wheelSpeedsConstP
             break;
         case TRICYCLE:
             odom->setSpeedIndex( ( speed->speedLF + speed->speedRF ) / 2, 0 );
+            break;
+        case OMNI_WHEEL:
+            odom->setSpeedIndex( speed->speedRF, 0 );
+            odom->setSpeedIndex( speed->speedLF, 1 );
+            odom->setSpeedIndex( speed->speedLB, 2 );
             break;
         case MECANUM_WHEEL:
             odom->setSpeedIndex( speed->speedRF, 0 );

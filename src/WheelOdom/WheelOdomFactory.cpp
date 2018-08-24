@@ -2,6 +2,7 @@
 #include "Bicycle.h"
 #include "FrontWheel.h"
 #include "MecanumWheel.h"
+#include "OmniWheel.h"
 #include "RearWheel.h"
 #include "Tricycle.h"
 
@@ -43,6 +44,11 @@ wheel_odom::WheelOdomFactory::init( wheel_odom::WheelModel type, double _length,
         case BICYCLE:
         {
             BicyclePtr initial( new Bicycle( _length, _width ) );
+            return initial;
+        }
+        case OMNI_WHEEL:
+        {
+            OmniWheelPtr initial( new OmniWheel( _length, _width ) );
             return initial;
         }
         case MECANUM_WHEEL:
